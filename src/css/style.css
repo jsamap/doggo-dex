@@ -3,7 +3,7 @@
     --primary-color: #20485d;
     --secondary-color: #324a24;
     --tertiary-color: #754300;
-    --accent1-color: yellow;
+    --accent1-color: #647659;
     --accent2-color: #999999;
     --accent3-color: #ebb265;
     --font1-color: black;
@@ -81,7 +81,7 @@ header img {
     width: 100%;
 }
 .nav-container {
-    position:absolute;
+    position: absolute;
     top: 1.5rem;
     right: 1.5rem;
     display: flex;
@@ -158,31 +158,36 @@ nav ul {
 
 /* #endregion */
 
-/* #region Hero banner*/
+/* #region Hero Banner*/
 
 .hero {
-  display: flex;
-  gap: .25rem;
+    display: flex;
+    gap: 0.25rem;
+    padding: .25rem 0;
 }
 
 .hero div {
-  flex: 1 1 300px;
-  height: 250px;
-  overflow: hidden;
+    flex: 1 1 300px;
+    height: 250px;
+}
+.hero img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+}
+.hero div:hover {
+    transform: scale(1.1);
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
 }
 
-.hero img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover; /* crops instead of stretching */
-}
-#hero-1{
+#hero-1 {
     display: none;
 }
-#hero-2{
+#hero-2 {
     display: flex;
 }
-#hero-3{
+#hero-3 {
     display: none;
 }
 
@@ -201,7 +206,7 @@ h1 {
     background-color: var(--primary-color);
     color: #eee;
     text-align: center;
-    padding: .5rem;
+    padding: 0.5rem;
     margin: 0 auto;
 }
 
@@ -269,18 +274,18 @@ footer {
 
 /* #region Banner Pictures */
 @media (min-width: 500px) {
-    #hero-1{
+    #hero-1 {
         display: flex;
     }
-    #hero-2{
+    #hero-2 {
         display: none;
     }
-    #hero-3{
+    #hero-3 {
         display: flex;
     }
 }
 @media (min-width: 900px) {
-    #hero-2{
+    #hero-2 {
         display: flex;
     }
     .hero div {
@@ -290,31 +295,161 @@ footer {
 /* #endregion */
 
 /* #region Randoms */
+
 .randoms {
     display: flex;
-    flex-flow: row;
-    flex-wrap: wrap;
-    justify-content: space-evenly;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
     padding: 1rem 0;
-    gap: 2rem;
-}
-.randoms div {
-    max-width: 500px;
-    min-width: 250px;
     flex: 1;
+    gap: 1rem;
 }
+
+.card {
+    width: 100%;
+    max-width: 300px;
+    height: 250px;
+    max-height: 500px;
+    perspective: 1000px;
+    transition: all 0.6s ease-in-out;
+    position: relative;
+    z-index: 1;
+}
+
+.card-inner {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s;
+    transform-style: preserve-3d;
+    
+}
+.card.flipped .card-inner {
+    transform: rotateY(180deg);
+}
+
 .randoms img {
     max-height: 300px;
     max-width: 100%;
 }
+
+.randoms h3 {
+    background-color: black;
+    color: white;
+    padding: .5rem;
+}
+
+.randoms p {
+    max-width: 300px;
+    padding: 1rem;
+}
+
+.card.modal-active {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%) scale(1.1);
+    width: 85%;
+    max-width: 800px;
+    height: 50%;
+    z-index: 2000;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-front,
+.card-back {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    backface-visibility: hidden;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 10px;
+}
+
+.card-front {
+    background: var(--accent1-color);
+}
+.card-front:hover {
+    cursor: pointer;
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+
+.card-back {
+    background: #373737;
+    color: white;
+    transform: rotateY(180deg);
+    padding: 1rem;
+}
+
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    background: transparent;
+    border: none;
+    font-size: 2rem;
+    color: white;
+    cursor: pointer;
+}
+
+.overlay {
+    display: none;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.6);
+    z-index: 1000;
+    width: 100%;
+    height: 100%;
+}
+
+.overlay.active {
+    display: block;
+}
+
+
 /* #endregion */
+
+/* #region Main Search Breeds */
+.main-search-breeds {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem;
+}
+.main-search-breeds p {
+    text-align: center;
+    font-size: 1.2rem;
+}
+.main-search-breeds a {
+    text-decoration: none;
+    padding: .75rem;
+    background-color: var(--tertiary-color);
+    color: white;
+    font-weight: bold;
+    border-radius: 8px;
+    max-width: 150px;
+    text-align: center;
+    
+}
+.main-search-breeds a:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+}
+/* #endregion */
+
 
 /* LARGER  */
 @media (min-width: 600px) {
     /* #region Navigation */
     .logo-container {
         justify-content: left;
-        }
+    }
     .logo-container span {
         display: block;
         font-size: 1.5rem;
@@ -346,7 +481,8 @@ footer {
     /* #endregion */
 
     /* #region Banner */
-    
+    .randoms{
+        flex-flow: row;
+    }
     /* #endregion */
-
 }
