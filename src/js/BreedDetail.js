@@ -20,6 +20,16 @@ export default class BreedDetail {
         
         const favButton = document.getElementById("addFavorite");
         favButton.addEventListener("click", this.addFavorite.bind(this));
+
+        const ratingExpandButton = document.getElementById("button-expand");
+        const ratingDetailsSection = document.getElementById("rating-details");
+        ratingExpandButton.addEventListener("click", () => {
+            ratingExpandButton.classList.toggle("rotated");
+            console.log(ratingDetailsSection)
+            ratingDetailsSection.classList.toggle("hidden");
+            ratingDetailsSection.classList.toggle("rating-details");
+        });
+
     }
 
     addFavorite() {
@@ -129,7 +139,7 @@ export default class BreedDetail {
         
 
         let ratingElement =  `
-           <div>
+           <div class="overall-rating">
                 <h3>Overall Rating: ${average}</h3>
                 <hr>
                 <div id="breed-rating">
@@ -156,9 +166,9 @@ export default class BreedDetail {
         `
                 </div>
                 <hr>
-                <button><img src="/images/icons/double-down.svg" alt="Expand rating section"></button>
+                <button id="button-expand"><img src="/images/icons/double-down.svg" alt="Expand rating section"></button>
             </div>
-            <div>
+            <div id="rating-details" class="hidden">
                 <table>
         `
         
@@ -175,8 +185,6 @@ export default class BreedDetail {
                 </table>
             </div>
           `
-        
-        
         
         return ratingElement;
     }

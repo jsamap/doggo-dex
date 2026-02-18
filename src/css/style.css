@@ -586,19 +586,34 @@ select option {
     display: flex;
     flex-direction: column;
 }
-.breed-rating>div>div {
+.overall-rating {
     border: 1px solid gray;
     padding: 0 .5rem;
 
     width: 100%;
+    max-width: 500px;
     display: flex;
     flex-flow: column;
     justify-content: center;
     align-items: center;
+    flex-wrap: nowrap;
 }
-.breed-rating div {
+.overall-rating div{
     max-width: 500px;
     display: flex;
+    flex-wrap: nowrap;
+}
+
+.rating-details {
+    border: 1px solid gray;
+    padding: 0 .5rem;
+
+    width: 100%;
+    max-width: 500px;
+    display: flex;
+    flex-flow: column;
+    justify-content: center;
+    align-items: center;
     flex-wrap: nowrap;
 }
 
@@ -618,16 +633,25 @@ select option {
 hr {
     width: 100%;
 }
-.breed-rating button {
+#button-expand {
     max-width: 40px;
     max-height: 40px;
     border: 0;
     padding: 0;
     background-color: white;
 }
-.breed-rating button:hover {
-    transform: scale(1.1);
+#button-expand img {
+    transition: transform 0.5s ease;
+    cursor: pointer;
 }
+.rotated {
+    transform: rotate(180deg);
+}
+
+.hidden {
+    display: none;
+}
+
 
 
 

@@ -1,4 +1,4 @@
-import{h as s,l as i,g as r,s as o,b as n,a as l}from"./utils-DM9Wm1Jm.js";class c{constructor(t,a){this.dataSource=t,this.listElement=a}async init(){this.renderFavorites(this.dataSource)}favoriteTemplate(t){return`<li class="">
+import{h as s,l as i,g as r,s as o,b as n,a as l}from"./utils-BsHpiXy2.js";class c{constructor(t,a){this.dataSource=t,this.listElement=a}async init(){this.renderFavorites(this.dataSource)}favoriteTemplate(t){return`<li class="">
                 <div class="">
                     <img src="${t.image.url}" alt="${t.Name}" />
                     <h3>${t.name}</h3>
