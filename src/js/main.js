@@ -1,4 +1,4 @@
-import ExternalServices from "./ExternalServices.mjs";
+import { DogApiService, TheDogApiService } from "./ExternalServices.mjs";
 import { loadHeaderFooter, getNavBar, setActiveNav } from "./utils.mjs";
 
 async function init() {
@@ -6,11 +6,12 @@ async function init() {
     getNavBar();
     setActiveNav();
 
-    const dataSource = new ExternalServices();
-    const fact = await  dataSource.getRandomFact();
+    const dogDataSource = new DogApiService();
+    const fact = await  dogDataSource.getRandomFact();
     document.querySelector("#fact").textContent = fact;
     
-    const picture = await dataSource.getRandomPicture();
+    const theDogDataSource = new TheDogApiService();
+    const picture = await theDogDataSource.getRandomPicture();
     document.querySelector("#picture").src = picture;
 }
 init();
@@ -51,4 +52,38 @@ pictureClose.addEventListener("click", (event) => {
 overlay.addEventListener("click", () => {
   factCard.classList.remove("flipped", "modal-active");
   overlay.classList.remove("active");
+});
+
+
+
+
+// SET MESSAGE FOR LAST VISIT
+const lastVisitElement = document.querySelector('#lastVisit p');
+const lastVisit = window.localStorage.getItem("lastvisit-cc");
+const today = new Date();
+
+if (lastVisit == null) {
+    lastVisitElement.textContent = 'Welcome! Let us know if you have any questions.';
+} else {
+    const lastVisitDate = new Date(lastVisit);
+    
+    const daysDiff = Math.floor((today - lastVisitDate) / (1000 * 60 * 60 * 24));
+    if (daysDiff < 1) {
+        lastVisitElement.textContent = 'Back so soon! Awesome!';
+    } else {
+        if (daysDiff == 1) {
+            lastVisitElement.textContent = `You last visited ${daysDiff} day ago.`;
+        } else {
+            lastVisitElement.textContent = `You last visited ${daysDiff} days ago.`;
+        }
+    }
+}
+localStorage.setItem("lastvisit-cc", today);
+
+// LAST VISIT MODAL - OPEN / CLOSE
+const visitContainer = document.getElementById("lastVisit");
+
+document.getElementById("visitClose").addEventListener("click", function(event) {
+    event.preventDefault();
+    document.querySelector("main").removeChild(visitContainer);    
 });

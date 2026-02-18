@@ -53,6 +53,49 @@ export function renderWithTemplate(template, parentElement, data, callback) {
     }
 }
 
+export function renderOptionsWithTemplate(
+    template,
+    parentElement,
+    list,
+    position = "afterbegin",
+    clear = true,
+) {
+    const elements = list.map(template);
+    if (clear) {
+        parentElement.innerHTML = "";
+    }
+    parentElement.insertAdjacentHTML(position, elements.join(""));
+}
+export function renderBreedWithTemplate(
+    template,
+    parentElement,
+    breed,
+    position = "afterbegin",
+    clear = true,
+) {
+    const element = template(breed);
+    if (clear) {
+        parentElement.innerHTML = "";
+    }
+    parentElement.insertAdjacentHTML(position, element);
+}
+
+export function invertRatingScore (score){
+    let invertedScore = score
+    if (score == 5){
+        invertedScore = 1
+    }
+    if (score == 4){
+        invertedScore = 2
+    }
+    if (score == 2){
+        invertedScore = 4
+    }
+    if (score == 1 || score == 0){
+        invertedScore = 5
+    }
+    return invertedScore;
+}
 
 
 // // wrapper for querySelector...returns matching element
