@@ -492,6 +492,57 @@ select option {
     font-size: 1rem;
 }
 
+.profile-picture{
+    background-color: var(--accent3-color);
+    height: auto;
+    position: relative;
+}
+
+.button-container {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    background-color: black;
+
+    display: flex;
+    justify-content: center;
+}
+.button-container button {
+    max-width: 300px;
+    background-color: black;
+    border-radius:0 5px;
+}
+.button-container button:hover {
+    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
+    font-weight: bold;
+    border: 2px solid black;
+}
+.text-white {
+    color: white;
+}
+.text-red {
+    color: rgb(233, 81, 81);
+}
+.glow-red {
+  animation: glow 0.5s ease;
+}
+@keyframes glow {
+  0% {
+    box-shadow: 0 0 0px red;
+    background-color: black;
+  }
+  50% {
+    box-shadow: 0 0 10px red;
+    background-color: rgba(255, 0, 0, 0.2);
+  }
+  100% {
+    box-shadow: 0 0 0px red;
+    background-color: black;
+  }
+}
+
+
+
 .breed-details {
     padding: 1rem 0 0 0;
     display: flex;
@@ -578,23 +629,29 @@ hr {
     transform: scale(1.1);
 }
 
-.button-container {
-    padding: 1rem 0;
+
+
+#favorites-container {
     width: 100%;
     display: flex;
     justify-content: center;
 }
-.button-container button {
-    max-width: 300px;
-    color: white;
-    background-color: var(--secondary-color);
-    border-radius:0 5px;
+
+#favorites-container ul {
+    max-width: 500px;
 }
-.button-container button:hover {
-    box-shadow: 0 0 30px rgba(0, 0, 0, 0.5);
-    font-weight: bold;
-    border: 2px solid black;
+#favorites-container li {
+    list-style-type: none;
+    background-color: var(--accent3-color);
+    margin: 1rem 0;
 }
+#favorites-container img {
+    width: 100%;
+}
+#favorites-container h3 {
+    padding: .2rem 1rem;
+}
+
 /* #endregion */
 
 
@@ -618,6 +675,7 @@ hr {
     }
 
     .navigation a {
+        max-width: 200px;
         display: block;
         flex: 1 1 100%;
     }
@@ -631,7 +689,7 @@ hr {
         flex-direction: row;
     }
     nav a {
-        flex: 1 1 100%;
+        white-space: nowrap;
     }
     /* #endregion */
 

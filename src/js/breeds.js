@@ -1,4 +1,4 @@
-import { loadHeaderFooter, getNavBar, setActiveNav } from "./utils.mjs";
+import { loadHeaderFooter, getNavBar, setActiveNav, setFavoritesCount } from "./utils.mjs";
 import { TheDogApiService, ApiNinjaService } from "./ExternalServices.mjs";
 import BreedList from "./BreedList";
 import BreedDetail from "./BreedDetail";
@@ -7,6 +7,7 @@ async function init() {
     await loadHeaderFooter();
     getNavBar();
     setActiveNav();
+    setFavoritesCount();
 
     let dataSource = new TheDogApiService();
     const breedSelect = document.querySelector("#breed-select");
@@ -29,9 +30,9 @@ async function init() {
         
         const breedDetail = new BreedDetail(id, dataSource, breedContainer, ratingDataSource, ratingContainer);
         breedDetail.init();
+
     });
 
 
 }
 init();
-

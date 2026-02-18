@@ -1,4 +1,4 @@
-import { renderBreedWithTemplate, invertRatingScore } from "./utils.mjs";
+import { renderBreedWithTemplate, invertRatingScore, getLocalStorage, setLocalStorage, setFavoritesCount, increaseFavoritesCount, decreaseFavoritesCount } from "./utils.mjs";
 
 export default class BreedDetail {
     constructor (breed_id, detailDataSource, detailElement, ratingDataSource, ratingElement){
@@ -7,26 +7,70 @@ export default class BreedDetail {
         this.detailElement = detailElement;
         this.ratingDataSource = ratingDataSource;
         this.ratingElement = ratingElement;
+        this.breedDetail = {};
     }
     
     async init(){
-        console.log("INIT START")
-        console.log(this.detailDataSource)
-        const breedData = await this.detailDataSource.getBreedById(this.breed_id);
-        const ratingData = await this.ratingDataSource.getBreedByName(breedData.name);
+        this.breedDetail = await this.detailDataSource.getBreedById(this.breed_id);
+        const ratingData = await this.ratingDataSource.getBreedByName(this.breedDetail.name);
         
-        console.log("INIT MID");
-        console.log(breedData);
+        console.log(this.breedDetail);
         console.log(ratingData);
-        this.renderBreed(breedData, ratingData);
+        this.renderBreed(this.breedDetail, ratingData);
         
-        console.log("INIT END")
+        const favButton = document.getElementById("addFavorite");
+        favButton.addEventListener("click", this.addFavorite.bind(this));
+    }
+
+    addFavorite() {
+        const favorites = getLocalStorage("dd-favorites") || [];
+
+        const index = favorites.findIndex(fav => fav.id === this.breedDetail.id);
+
+        let favButton = document.getElementById("addFavorite");
+
+        if (index === -1) {
+            favorites.push(this.breedDetail);
+
+            favButton.classList.remove("text-white");
+            favButton.classList.add("text-red");
+            
+            favButton.classList.add("glow-red");
+
+            favButton.addEventListener("animationend", () => {
+                favButton.classList.remove("glow-red");
+            }, { once: true });
+
+            increaseFavoritesCount()
+            setFavoritesCount()
+
+        } else {
+            favorites.splice(index, 1);
+    
+            favButton.classList.remove("text-red");
+            favButton.classList.add("text-white");
+
+            decreaseFavoritesCount()
+            setFavoritesCount()
+        }
+
+        setLocalStorage("dd-favorites", favorites);
+
     }
 
     breedDetailTemplate(breed){
+        const favorites = getLocalStorage("dd-favorites") || [];
+        const index = favorites.findIndex(fav => fav.id === breed.id);
+        
         return (
           `
-            <img src="${breed.image.url}" alt="${breed.name}">
+            <div class="profile-picture">
+                <img src="${breed.image.url}" alt="${breed.name}">
+                
+                <div class="button-container">
+                    <button class="${index>-1 ?"text-red":"text-white"}" id="addFavorite">FAVORITE ❤️</button>
+                </div>
+            </div>
             <table>
                 <tr>
                     <th>Breed:</th>
@@ -61,9 +105,6 @@ export default class BreedDetail {
                     <td>${breed.breed_group}</td>
                 </tr>
             </table>
-            <div class="button-container">
-                <button>FAVORITE ❤️</button>
-            </div>
           `
         );
     }
@@ -98,14 +139,12 @@ export default class BreedDetail {
         const decimal = (average-whole).toFixed(1);
 
         for (let i = 1; i <= whole; i++) {
-            console.log("Iteration:", i);
             ratingElement += 
         `
                     <img src="/images/icons/star-gold.svg" alt="star" class="star">
         `
         }
         if (decimal>0) {
-            console.log("Decimal:", decimal)
             ratingElement += 
         `
                     <img src="/images/icons/star-gold.svg" alt="star" class="star half-star" style="--percent:${decimal}" >

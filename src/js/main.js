@@ -59,17 +59,17 @@ overlay.addEventListener("click", () => {
 
 // SET MESSAGE FOR LAST VISIT
 const lastVisitElement = document.querySelector('#lastVisit p');
-const lastVisit = window.localStorage.getItem("lastvisit-cc");
+const lastVisit = window.localStorage.getItem("dd-lastvisit");
 const today = new Date();
 
 if (lastVisit == null) {
-    lastVisitElement.textContent = 'Welcome! Let us know if you have any questions.';
+    lastVisitElement.textContent = 'Welcome! We hope you find the information you need.';
 } else {
     const lastVisitDate = new Date(lastVisit);
     
     const daysDiff = Math.floor((today - lastVisitDate) / (1000 * 60 * 60 * 24));
     if (daysDiff < 1) {
-        lastVisitElement.textContent = 'Back so soon! Awesome!';
+        lastVisitElement.textContent = "It's good to see you back so soon!";
     } else {
         if (daysDiff == 1) {
             lastVisitElement.textContent = `You last visited ${daysDiff} day ago.`;
@@ -78,7 +78,7 @@ if (lastVisit == null) {
         }
     }
 }
-localStorage.setItem("lastvisit-cc", today);
+localStorage.setItem("dd-lastvisit", today);
 
 // LAST VISIT MODAL - OPEN / CLOSE
 const visitContainer = document.getElementById("lastVisit");

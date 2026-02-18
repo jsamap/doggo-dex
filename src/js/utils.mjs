@@ -97,6 +97,54 @@ export function invertRatingScore (score){
     return invertedScore;
 }
 
+// retrieve data from localstorage
+export function getLocalStorage(key) {
+    return JSON.parse(localStorage.getItem(key));
+}
+// save data to local storage
+export function setLocalStorage(key, data) {
+    localStorage.setItem(key, JSON.stringify(data));
+}
+
+// Render Favorites list
+export function renderListWithTemplate(
+    template,
+    parentElement,
+    list,
+    position = "afterbegin",
+    clear = true,
+) {
+    const elements = list.map(template);
+    if (clear) {
+        parentElement.innerHTML = "";
+    }
+    parentElement.insertAdjacentHTML(position, elements.join(""));
+}
+
+// Set the favorites count in the header
+export function setFavoritesCount() {
+    const favsCount = getLocalStorage("dd-favoritescount");
+    document.getElementById("favs-count").textContent = favsCount != null ? favsCount : 0;
+}
+
+export function increaseFavoritesCount() {
+    console.log("increase")
+    const favsCount = getLocalStorage("dd-favoritescount");
+    console.log(favsCount)
+    setLocalStorage("dd-favoritescount", favsCount!=null ? favsCount+1 : 1)
+    const favsCount2 = getLocalStorage("dd-favoritescount");
+    console.log(favsCount2)
+}
+export function decreaseFavoritesCount() {
+    console.log("decrease")
+    const favsCount = getLocalStorage("dd-favoritescount");
+    console.log(favsCount)
+    setLocalStorage("dd-favoritescount", favsCount!=null && favsCount!=0 ? favsCount-1 : 0)
+    const favsCount2 = getLocalStorage("dd-favoritescount");
+    console.log(favsCount2)
+}
+
+
 
 // // wrapper for querySelector...returns matching element
 // export function qs(selector, parent = document) {
@@ -105,14 +153,7 @@ export function invertRatingScore (score){
 // // or a more concise version if you are into that sort of thing:
 // // export const qs = (selector, parent = document) => parent.querySelector(selector);
 
-// // retrieve data from localstorage
-// export function getLocalStorage(key) {
-//     return JSON.parse(localStorage.getItem(key));
-// }
-// // save data to local storage
-// export function setLocalStorage(key, data) {
-//     localStorage.setItem(key, JSON.stringify(data));
-// }
+
 // // set a listener for both touchend and click
 // export function setClick(selector, callback) {
 //     qs(selector).addEventListener("touchend", (event) => {
@@ -129,19 +170,7 @@ export function invertRatingScore (score){
 //     return value;
 // }
 
-// export function renderListWithTemplate(
-//     template,
-//     parentElement,
-//     list,
-//     position = "afterbegin",
-//     clear = true,
-// ) {
-//     const elements = list.map(template);
-//     if (clear) {
-//         parentElement.innerHTML = "";
-//     }
-//     parentElement.insertAdjacentHTML(position, elements.join(""));
-// }
+
 
 // export function renderWithTemplate(template, parentElement, data, callback) {
 //     parentElement.innerHTML = template;
