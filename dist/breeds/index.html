@@ -1,19 +1,16 @@
 <!doctype html>
 <html lang="en">
     <head>
-        <meta charset="UTF-8" />
-        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Home | DoggoDex</title>
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-        <link
-            rel="stylesheet"
-            href="https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto&display=swap"
-        />
-        <link rel="icon" type="image/x-icon" href="images/favicon.ico" />
-      <script type="module" crossorigin src="/assets/utils-HC0reqQ5.js"></script>
-      <script type="module" crossorigin src="/assets/breeds-DLe82X-T.js"></script>
-      <link rel="stylesheet" crossorigin href="/assets/utils-DQxFNHlb.css">
+        <meta charset="UTF-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" >
+        <title>Breeds | DoggoDex</title>
+        <link rel="preconnect" href="https://fonts.googleapis.com" >
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin >
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Merriweather&family=Roboto&display=swap" >
+        <link rel="icon" type="image/x-icon" href="/images/favicon.ico" >
+      <script type="module" crossorigin src="/assets/utils-CgZ_HpiK.js"></script>
+      <script type="module" crossorigin src="/assets/breeds-DOYNDYcc.js"></script>
+      <link rel="stylesheet" crossorigin href="/assets/utils-2JhIEQtD.css">
     </head>
 
     <body>
@@ -21,7 +18,18 @@
 
         <main>
             <h1>Breeds</h1>
-            
+            <div class="select-container">
+                <select name="breed-select" id="breed-select">
+                    <option value="" selected disabled hidden>Select a breed...</option>
+                </select>
+            </div>
+            <div class="breed-details">
+                <div id="breed-details"> </div>
+            </div>
+            <div class="breed-rating">
+                <div id="breed-rating"> </div>
+            </div>
+
         </main>
 
         <footer id="footer"></footer>
