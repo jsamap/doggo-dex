@@ -2,8 +2,8 @@ const urlDogApi = import.meta.env.VITE_API_URL_DOGAPI;
 const urlTheDogApi = import.meta.env.VITE_API_URL_THEDOGAPI;
 const urlApiNinja = import.meta.env.VITE_API_URL_APININJA;
 
-const theDogApiKey = "live_ZZhHEM1NXYRV6K3GtsG5n1X4m5BhpBKEspx5Y7qqre0ttmApUg8yf8rkezpKgAhc";
-const apiNinjaApiKey = "V9S0gG7LdQuUi5FCYaLpvCYZiyR6wnN9DUm1BXz0";
+const theDogApiKey = import.meta.env.VITE_API_KEY_THEDOGAPI;
+const apiNinjaApiKey = import.meta.env.VITE_API_KEY_APININJA;
 
 async function convertToJson(res) {
   const jsonResponse = await res.json();
