@@ -11,6 +11,7 @@
     --font3-color: white;
     --heading-font: "Merriweather", serif;
     --body-font: "Roboto", sans-serif;
+    --percent: 0.5;
 }
 
 * {
